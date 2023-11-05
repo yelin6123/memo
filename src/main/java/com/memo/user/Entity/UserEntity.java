@@ -45,4 +45,5 @@ public class UserEntity {
 	@Column(name="updatedAt")
 	@UpdateTimestamp
 	private ZonedDateTime updatedAt;
+
 }

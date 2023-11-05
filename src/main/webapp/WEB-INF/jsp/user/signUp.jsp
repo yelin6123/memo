@@ -143,9 +143,18 @@ $(document).ready(function() {
 		let params = $(this).serialize(); //form태그에 있는 name속성-값으로 파라미터 구성 : 직렬화
 		console.log(params);
 		
-		
-		$.post(url, params);
-		
+		//ajax로도 할 수 있지만 post메소드로도 할 수 있음 (password등 보이면 안되기에 Post로 함 )
+		$.post(url, params) //request //url어디로 보낼건지, params받은것
+		.done(function(data) { //callback함수- response
+			//{"code":200, "result":"성공"}  //기획서를 보면 로그인 화면으로 이동 한다고 되어있음 ~
+			if(data.code == 200) { //성
+				alert('가입을 환영합니다. 로그인을 해주세요!');
+				location.href =	"/user/sign-in-view"; //로그인 화면으로 이동
+			} else { 
+				//로직 실패 - 에러는 아님
+				alert(data.errorMessage);
+			}
+		}); 
 	});
 	
 });
