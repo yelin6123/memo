@@ -36,4 +36,15 @@ public class PostController {
 		//viewName으로 내릴꺼고 아직 만들지 않았지만post/postList로 만들어서 내려줄거다..
 		return "template/layout";
 	}
+	
+	/**
+	 * 글쓰기 화면
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/post-create-view")
+	public String postCreateView(Model model) {
+		model.addAttribute("viewName", "post/postCreate");
+		return "template/layout";
+	}
 }

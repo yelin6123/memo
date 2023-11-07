@@ -13,7 +13,7 @@
 						<th>NO.</th>
 						<th>제목</th>
 						<th>작성날짜</th>
-						<th>수정날짜</th>
+						<th>수정날짜</th> 
 					</tr>
 				</thead>
 				<tbody>
@@ -35,7 +35,7 @@
 				</tbody>
 			</table>
 			<divj class="d-flex justify-content-end">
-				<a href="/post/post-creat-view" class="btn btn-warning">글쓰기</a>
+				<a href="/post/post-create-view" class="btn btn-warning">글쓰기</a>
 			</div>
 		</div>
 	</div>
