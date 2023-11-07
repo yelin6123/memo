@@ -22,14 +22,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @Getter
 @Builder
-@Table(name="user")
+@Table(name = "user")
 @Entity
 public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="loginId")
+	@Column(name = "loginId")
 	private String loginId;
 	
 	private String password;
@@ -38,12 +38,11 @@ public class UserEntity {
 	
 	private String email;
 	
-	@Column(name="createdAt", updatable = false)
 	@UpdateTimestamp
+	@Column(name = "createdAt", updatable = false)
 	private ZonedDateTime createdAt;
 	
-	@Column(name="updatedAt")
 	@UpdateTimestamp
+	@Column(name = "updatedAt")
 	private ZonedDateTime updatedAt;
-
 }
