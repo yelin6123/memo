@@ -18,7 +18,7 @@
 		<header class="bg-warning">
 			<jsp:include page="../include/header.jsp" /> <!--  "/" : 절대경로  상대경로 -> "../" 상위로 올라간다   -->
 		</header>
-		<section class="contents">
+		<section class="contents my-5">
 			<jsp:include page="../${viewName}.jsp" /> <%-- 원래라면 page="../user/signUp.jsp" --%>
 		</section>
 		<footer class="bg-warning">

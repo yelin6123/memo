@@ -12,8 +12,11 @@ import com.memo.post.domain.Post;
 public interface PostMapper {
 	public List<Map<String, Object>> selectPostList();
 	
-	
 	public List<Post> selectPostListByUserId(int userId);
+	
+	public Post selectPostByPostIdAndUserId(
+			@Param("postId") int postId, 
+			@Param("userId") int userId);
 	
 	public void insertPost(
 			//mybatis이기 때문에 내가 보내줘야 함

@@ -25,6 +25,13 @@ public class PostBO {
 		return postMapper.selectPostListByUserId(userId);
 	}
 	
+	//input : postID, userId 	output:Post
+	public Post getPostByPostIdAndUserId(int postId, int userId) {
+		return postMapper.selectPostByPostIdAndUserId(postId, userId) ;
+	}
+	
+	
+	
 	//input : params output :  x 성공되면 오류 안뜸~
 	public void addPost(int userId, String userLoginId, String subject, String content, MultipartFile file) {
 		//DB에 직접 넣을 수 없음 -> 우리 서버(컴퓨터)에 이미지를 올려놔야함 
@@ -36,8 +43,6 @@ public class PostBO {
 		if(file != null) {
 			imagePath = fileManager.saveFile(userLoginId, file);
 		}
-		
-		
 		postMapper.insertPost(userId, subject, content, imagePath);
 	}
 
