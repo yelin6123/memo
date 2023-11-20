@@ -6,7 +6,9 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,7 +23,14 @@ public class PostRestController {
 	@Autowired
 	private PostBO postBO;
 	
-	
+	/**
+	 * 글쓰기 API
+	 * @param subject
+	 * @param content
+	 * @param file
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/create")
 	public Map<String, Object> create( //userId는 안받아도 되나요..?
 			@RequestParam("subject") String subject,
@@ -48,6 +57,62 @@ public class PostRestController {
 		result.put("result", "성공");
 		
 		return result;
-		
 	}
+	
+	/**
+	 * 글 수정 API
+	 * @param postId
+	 * @param subject
+	 * @param content
+	 * @param file
+	 * @param session
+	 * @return
+	 */
+	@PutMapping("/update")
+	public Map<String, Object> update(
+		@RequestParam("postId") int postId,
+		@RequestParam("subject") String subject,
+		@RequestParam("content") String content,
+		@RequestParam(value = "file", required = false) MultipartFile file, //객체로 받아오기 위해 Multi~ 클래스로 가져옴~
+		//용량 초과로 505에러 -> 구글에서 'spring 파일 업로드 용량 제한' 검색 후 application.yml에 추가 
+		HttpSession session) {
+		
+		int userId = (int)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
+		
+		//db update
+		postBO.updatePost(userId, userLoginId, postId, subject, content, file);
+		
+		//응답값
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
+	
+	/**
+	 * 글 삭제 API
+	 * @param postId
+	 * @return
+	 */
+	@DeleteMapping("/delete")
+	public Map<String, Object> delete(
+			@RequestParam("postId") int postId,
+			HttpSession session) {
+		
+		//확실히 하기 위해 추가~	
+		int userId = (int)session.getAttribute("userId");
+		
+		//db 삭제
+		postBO.deleteByPostIdUserId(postId, userId);
+		
+		//응답값
+		Map<String, Object> result = new HashMap<>();
+		result.put("code", 200);
+		result.put("result", "성공");
+		
+		return result;
+	}
+	
 }

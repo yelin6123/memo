@@ -25,4 +25,17 @@ public interface PostMapper {
 			@Param("subject")  String subject, 
 			@Param("content") String content,
 			@Param("imagePath") String imagePath);
+	
+	//업데이트 
+	public void updatePostByPostIdUserId(
+			@Param("postId") int postId, 
+			@Param("userId") int userId, 
+			@Param("subject") String subject, 
+			@Param("content") String content, 
+			@Param("imagePath") String imagePath);
+	
+	
+	public void deleteByPostIdUserId(
+			@Param("postId") int postId,
+			@Param("userId") int userId);
 }
